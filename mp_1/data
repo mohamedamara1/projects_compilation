@@ -1,0 +1,13 @@
+int b;
+a = 20;
+b = 60;
+if (1<2) then { if (1<2) then {a=5;b=9;} endif }  endif
+if (1<2) then { if (1<2) then {a=5;b=9;} else {y = 6;} endif}  endif
+for ( i =1;i<n; i=i+1;){
+    t=5;
+}
+
+while (a<n){
+    a=5;
+}
+c = 50;

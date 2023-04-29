@@ -1,0 +1,1 @@
+select nom from client join emloye on id=thisid where test=45
