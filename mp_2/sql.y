@@ -34,7 +34,7 @@ statement: select_statement
           | insert_statement
           ;
 
-select_statement: SELECT column_list FROM table_list optional_join_clause optional_where_clause
+select_statement: SELECT select_expr_list FROM table_references optional_join_clause optional_where_clause
                  ;
 
 update_statement: UPDATE table_name SET column_name EQUAL VALUE optional_where_clause
@@ -50,12 +50,34 @@ column_list: column_name
             | column_list COMMA column_name
             ;
 
-column_name: NAME
+select_expr_list:
+            select_expr
+            | select_expr_list ',' select_expr
+            | '*'
             ;
+
+select_expr: expr opt_as_alias ;
+
+table_references: table_reference 
+    | table_references ',' table_reference 
+    ;   
 
 table_list: table_name
             | table_list COMMA table_name
             ;
+table_reference:  table_factor
+  | join_table
+;
+
+table_factor:
+          NAME opt_as_alias  
+        | NAME '.' NAME opt_as_alias  
+        | table_subquery opt_as NAME 
+        | '(' table_references ')'
+        ;
+
+table_subquery: '(' select_stmt ')' 
+   ;
 
 table_name: NAME
             ;
