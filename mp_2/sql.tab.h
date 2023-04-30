@@ -69,15 +69,16 @@ extern int yydebug;
     NAME = 270,                    /* NAME  */
     EQUAL = 271,                   /* EQUAL  */
     COMMA = 272,                   /* COMMA  */
-    OP = 273,                      /* OP  */
-    CP = 274,                      /* CP  */
-    LT = 275,                      /* LT  */
-    GT = 276,                      /* GT  */
-    PLUS = 277,                    /* PLUS  */
-    MINUS = 278,                   /* MINUS  */
-    MULTIPLY = 279,                /* MULTIPLY  */
-    DIVISION = 280,                /* DIVISION  */
-    VALUE = 281                    /* VALUE  */
+    PV = 273,                      /* PV  */
+    OP = 274,                      /* OP  */
+    CP = 275,                      /* CP  */
+    LT = 276,                      /* LT  */
+    GT = 277,                      /* GT  */
+    PLUS = 278,                    /* PLUS  */
+    MINUS = 279,                   /* MINUS  */
+    MULTIPLY = 280,                /* MULTIPLY  */
+    DIVISION = 281,                /* DIVISION  */
+    VALUE = 282                    /* VALUE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -91,7 +92,7 @@ union YYSTYPE
     char *string_val;
     double num_val;
 
-#line 95 "sql.tab.h"
+#line 96 "sql.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

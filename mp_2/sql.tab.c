@@ -119,35 +119,33 @@ enum yysymbol_kind_t
   YYSYMBOL_NAME = 15,                      /* NAME  */
   YYSYMBOL_EQUAL = 16,                     /* EQUAL  */
   YYSYMBOL_COMMA = 17,                     /* COMMA  */
-  YYSYMBOL_OP = 18,                        /* OP  */
-  YYSYMBOL_CP = 19,                        /* CP  */
-  YYSYMBOL_LT = 20,                        /* LT  */
-  YYSYMBOL_GT = 21,                        /* GT  */
-  YYSYMBOL_PLUS = 22,                      /* PLUS  */
-  YYSYMBOL_MINUS = 23,                     /* MINUS  */
-  YYSYMBOL_MULTIPLY = 24,                  /* MULTIPLY  */
-  YYSYMBOL_DIVISION = 25,                  /* DIVISION  */
-  YYSYMBOL_VALUE = 26,                     /* VALUE  */
-  YYSYMBOL_27_ = 27,                       /* ';'  */
-  YYSYMBOL_28_ = 28,                       /* '='  */
-  YYSYMBOL_29_ = 29,                       /* ','  */
-  YYSYMBOL_YYACCEPT = 30,                  /* $accept  */
-  YYSYMBOL_input = 31,                     /* input  */
-  YYSYMBOL_statement_list = 32,            /* statement_list  */
-  YYSYMBOL_statement = 33,                 /* statement  */
-  YYSYMBOL_select_statement = 34,          /* select_statement  */
-  YYSYMBOL_update_statement = 35,          /* update_statement  */
-  YYSYMBOL_delete_statement = 36,          /* delete_statement  */
-  YYSYMBOL_insert_statement = 37,          /* insert_statement  */
-  YYSYMBOL_column_list = 38,               /* column_list  */
-  YYSYMBOL_column_name = 39,               /* column_name  */
-  YYSYMBOL_table_list = 40,                /* table_list  */
-  YYSYMBOL_table_name = 41,                /* table_name  */
-  YYSYMBOL_join_clause = 42,               /* join_clause  */
-  YYSYMBOL_optional_join_clause = 43,      /* optional_join_clause  */
-  YYSYMBOL_value_list = 44,                /* value_list  */
-  YYSYMBOL_optional_where_clause = 45,     /* optional_where_clause  */
-  YYSYMBOL_expression = 46                 /* expression  */
+  YYSYMBOL_PV = 18,                        /* PV  */
+  YYSYMBOL_OP = 19,                        /* OP  */
+  YYSYMBOL_CP = 20,                        /* CP  */
+  YYSYMBOL_LT = 21,                        /* LT  */
+  YYSYMBOL_GT = 22,                        /* GT  */
+  YYSYMBOL_PLUS = 23,                      /* PLUS  */
+  YYSYMBOL_MINUS = 24,                     /* MINUS  */
+  YYSYMBOL_MULTIPLY = 25,                  /* MULTIPLY  */
+  YYSYMBOL_DIVISION = 26,                  /* DIVISION  */
+  YYSYMBOL_VALUE = 27,                     /* VALUE  */
+  YYSYMBOL_YYACCEPT = 28,                  /* $accept  */
+  YYSYMBOL_input = 29,                     /* input  */
+  YYSYMBOL_statement_list = 30,            /* statement_list  */
+  YYSYMBOL_statement = 31,                 /* statement  */
+  YYSYMBOL_select_statement = 32,          /* select_statement  */
+  YYSYMBOL_update_statement = 33,          /* update_statement  */
+  YYSYMBOL_delete_statement = 34,          /* delete_statement  */
+  YYSYMBOL_insert_statement = 35,          /* insert_statement  */
+  YYSYMBOL_column_list = 36,               /* column_list  */
+  YYSYMBOL_column_name = 37,               /* column_name  */
+  YYSYMBOL_table_list = 38,                /* table_list  */
+  YYSYMBOL_table_name = 39,                /* table_name  */
+  YYSYMBOL_join_clause = 40,               /* join_clause  */
+  YYSYMBOL_optional_join_clause = 41,      /* optional_join_clause  */
+  YYSYMBOL_value_list = 42,                /* value_list  */
+  YYSYMBOL_optional_where_clause = 43,     /* optional_where_clause  */
+  YYSYMBOL_expression = 44                 /* expression  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -478,10 +476,10 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  19
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   39
+#define YYLAST   46
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  30
+#define YYNTOKENS  28
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
@@ -490,7 +488,7 @@ union yyalloc
 #define YYNSTATES  56
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   281
+#define YYMAXUTOK   282
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -508,9 +506,9 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    29,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    27,
-       2,    28,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -532,7 +530,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26
+      25,    26,    27
 };
 
 #if YYDEBUG
@@ -560,19 +558,18 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   {
   "end of file", "error", "invalid token", "SELECT", "UPDATE", "DELETE",
   "INSERT", "JOIN", "ON", "TABLE", "WHERE", "SET", "FROM", "INTO",
-  "VALUES", "NAME", "EQUAL", "COMMA", "OP", "CP", "LT", "GT", "PLUS",
-  "MINUS", "MULTIPLY", "DIVISION", "VALUE", "';'", "'='", "','", "$accept",
-  "input", "statement_list", "statement", "select_statement",
-  "update_statement", "delete_statement", "insert_statement",
-  "column_list", "column_name", "table_list", "table_name", "join_clause",
-  "optional_join_clause", "value_list", "optional_where_clause",
-  "expression", YY_NULLPTR
+  "VALUES", "NAME", "EQUAL", "COMMA", "PV", "OP", "CP", "LT", "GT", "PLUS",
+  "MINUS", "MULTIPLY", "DIVISION", "VALUE", "$accept", "input",
+  "statement_list", "statement", "select_statement", "update_statement",
+  "delete_statement", "insert_statement", "column_list", "column_name",
+  "table_list", "table_name", "join_clause", "optional_join_clause",
+  "value_list", "optional_where_clause", "expression", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
 #endif
 
-#define YYPACT_NINF (-31)
+#define YYPACT_NINF (-35)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -586,12 +583,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       5,     1,     2,    -6,     8,    23,    -3,   -31,   -31,   -31,
-     -31,   -31,   -31,    -9,   -31,   -31,    14,     2,     2,   -31,
-       5,     2,     1,     1,    16,    13,   -31,    -7,   -31,   -31,
-       0,    15,   -31,    11,     2,     2,   -31,    16,     6,    17,
-     -31,     9,    26,   -31,   -31,    16,    10,   -31,   -15,    15,
-     -31,   -31,   -31,    12,   -31,   -31
+       3,     4,     5,     9,    10,    22,     6,   -35,   -35,   -35,
+     -35,   -35,   -35,    -7,   -35,   -35,    14,     5,     5,   -35,
+       3,     5,     4,     4,    16,    13,   -35,    -5,   -35,   -35,
+      12,    15,   -35,    17,     5,     5,   -35,    16,     2,    18,
+     -35,     8,    23,   -35,   -35,    16,    11,   -35,    -4,    15,
+     -35,   -35,    19,   -35,   -35,   -35
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -604,14 +601,14 @@ static const yytype_int8 yydefact[] =
        0,     0,     0,     0,    25,     0,     4,    21,    16,    14,
        0,     0,    11,     0,     0,     0,    20,    25,     0,     0,
       24,     0,     0,    17,     9,    25,     0,    22,     0,     0,
-      10,    26,    12,     0,    19,    23
+      10,    26,     0,    12,    19,    23
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -31,   -31,   -31,    19,   -31,   -31,   -31,   -31,   -31,   -10,
-     -31,   -16,   -31,   -31,   -31,   -30,   -18
+     -35,   -35,   -35,    20,   -35,   -35,   -35,   -35,   -35,    -8,
+     -35,   -17,   -35,   -35,   -35,   -34,   -16
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -626,38 +623,40 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      34,    24,    25,    21,    52,    28,    17,    44,     1,     2,
-       3,     4,    29,    30,    53,    50,    12,    15,    42,    43,
-      22,    18,    35,    19,    20,    23,    31,    33,    38,    41,
-      39,    54,    45,    46,    49,    47,    51,     0,    55,    26
+      24,    25,    34,    44,    28,    21,     1,     2,     3,     4,
+      22,    50,    35,    52,    29,    30,    53,    42,    43,    12,
+      15,    17,    19,    18,    20,    23,    31,    33,    38,    45,
+      39,    49,     0,    54,    46,    47,    41,     0,    51,     0,
+      26,     0,     0,     0,     0,     0,    55
 };
 
 static const yytype_int8 yycheck[] =
 {
-       7,    17,    18,    12,    19,    21,    12,    37,     3,     4,
-       5,     6,    22,    23,    29,    45,    15,    15,    34,    35,
-      29,    13,    29,     0,    27,    11,    10,    14,    28,    18,
-      15,    49,    26,    16,     8,    26,    26,    -1,    26,    20
+      17,    18,     7,    37,    21,    12,     3,     4,     5,     6,
+      17,    45,    17,    17,    22,    23,    20,    34,    35,    15,
+      15,    12,     0,    13,    18,    11,    10,    14,    16,    27,
+      15,     8,    -1,    49,    16,    27,    19,    -1,    27,    -1,
+      20,    -1,    -1,    -1,    -1,    -1,    27
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     4,     5,     6,    31,    32,    33,    34,    35,
-      36,    37,    15,    38,    39,    15,    41,    12,    13,     0,
-      27,    12,    29,    11,    41,    41,    33,    40,    41,    39,
-      39,    10,    45,    14,     7,    29,    42,    43,    28,    15,
-      46,    18,    41,    41,    45,    26,    16,    26,    44,     8,
-      45,    26,    19,    29,    46,    26
+       0,     3,     4,     5,     6,    29,    30,    31,    32,    33,
+      34,    35,    15,    36,    37,    15,    39,    12,    13,     0,
+      18,    12,    17,    11,    39,    39,    31,    38,    39,    37,
+      37,    10,    43,    14,     7,    17,    40,    41,    16,    15,
+      44,    19,    39,    39,    43,    27,    16,    27,    42,     8,
+      43,    27,    17,    20,    44,    27
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    30,    31,    32,    32,    33,    33,    33,    33,    34,
-      35,    36,    37,    38,    38,    39,    40,    40,    41,    42,
-      43,    43,    44,    44,    45,    45,    46
+       0,    28,    29,    30,    30,    31,    31,    31,    31,    32,
+      33,    34,    35,    36,    36,    37,    38,    38,    39,    40,
+      41,    41,    42,    42,    43,    43,    44
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1313,7 +1312,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1317 "sql.tab.c"
+#line 1316 "sql.tab.c"
 
       default: break;
     }

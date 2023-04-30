@@ -23,6 +23,7 @@ INTO         { return INTO; }
 VALUES       { return VALUES; }
 \=          { return EQUAL; }
 \,          { return COMMA; }
+\;          {return PV;}
 \(          { return OP; }
 \)          { return CP; }
 \<          { return LT; }

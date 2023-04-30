@@ -9,7 +9,7 @@
 %locations
 
 %token SELECT UPDATE DELETE INSERT JOIN ON TABLE WHERE SET FROM INTO VALUES
-%token NAME EQUAL COMMA OP CP LT GT PLUS MINUS MULTIPLY DIVISION
+%token NAME EQUAL COMMA PV OP CP LT GT PLUS MINUS MULTIPLY DIVISION
 %token <string_val> VALUE
 
 %start input  /* Add %start statement here */
@@ -25,7 +25,7 @@ input: statement_list
      ;
 
 statement_list: statement
-          | statement_list ';' statement
+          | statement_list PV statement
           ;
 
 statement: select_statement
@@ -37,7 +37,7 @@ statement: select_statement
 select_statement: SELECT column_list FROM table_list optional_join_clause optional_where_clause
                  ;
 
-update_statement: UPDATE table_name SET column_name '=' VALUE optional_where_clause
+update_statement: UPDATE table_name SET column_name EQUAL VALUE optional_where_clause
                  ;
 
 delete_statement: DELETE FROM table_name optional_where_clause
@@ -47,14 +47,14 @@ insert_statement: INSERT INTO table_name  VALUES  OP value_list CP
                  ;
 
 column_list: column_name
-            | column_list ',' column_name
+            | column_list COMMA column_name
             ;
 
 column_name: NAME
             ;
 
 table_list: table_name
-            | table_list ',' table_name
+            | table_list COMMA table_name
             ;
 
 table_name: NAME
@@ -68,7 +68,7 @@ optional_join_clause: join_clause
                      ;
 
 value_list: VALUE
-            | value_list ',' VALUE
+            | value_list COMMA VALUE
             ;
 
 optional_where_clause: WHERE expression
