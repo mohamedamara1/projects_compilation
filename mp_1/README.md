@@ -9,6 +9,7 @@ Ce dossier contient les fichiers suivants :
 - main.c : Ce fichier contient la logique principale du programme.
 - main : Ce fichier est l'exécutable compilé du programme.
 
+![image](https://user-images.githubusercontent.com/88170182/235350584-3e12f523-29ea-47f2-bcd9-401c6cfff214.png)
 
 
 Voici la description de chaque ligne de code de Makefile :
