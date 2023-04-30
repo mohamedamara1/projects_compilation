@@ -82,7 +82,7 @@
 typedef struct {
     char* name;
     int type;  // 0 for int, 1 for float
-    void* value;
+    double value;
 } symbol;
 
 // Define a hash table to store symbol table entries
@@ -114,7 +114,7 @@ void insert_symbol(char* name, int type, void* value) {
     symbol* s = malloc(sizeof(symbol));
     s->name = strdup(name); // allocate memory for name
     s->type = type;
-    s->value = value;
+    s->value = 0;
     symbol_table[h] = s;
   //  free(name); // free name after it's copied to s->name
 }
@@ -129,12 +129,25 @@ symbol* lookup_symbol(char* name) {
         return NULL;  // Not found
     }
 }
-
+void update_symbol(char* name, double value) {
+    symbol* sym = lookup_symbol(name);
+    if (sym == NULL) {
+        printf("Error: variable '%s' has not been declared\n", name);
+    } else {
+        if (sym->type == INT_TYPE) {
+            int int_value = (int) value;
+            sym->value = (double)int_value;
+        } else if (sym->type == FLOAT_TYPE) {
+            float float_value = (float) value;
+            sym->value = (double)float_value;
+        }
+    }
+}
 int yylex(void); /* -Wall : avoid implicit call */
 int yyerror(const char*); /* same for bison */
 
 
-#line 138 "parseur.tab.c"
+#line 151 "parseur.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -603,11 +616,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   105,   105,   108,   109,   110,   114,   127,   128,   130,
-     131,   132,   133,   134,   139,   144,   145,   146,   147,   148,
-     151,   152,   155,   158,   162,   163,   164,   165,   166,   167,
-     168,   169,   170,   171,   172,   173,   174,   185,   186,   187,
-     188,   189,   190
+       0,   118,   118,   121,   122,   123,   127,   133,   134,   136,
+     137,   138,   139,   140,   145,   159,   160,   161,   162,   163,
+     166,   167,   170,   173,   177,   178,   179,   180,   181,   182,
+     183,   184,   185,   186,   187,   188,   189,   200,   201,   202,
+     203,   204,   205
 };
 #endif
 
@@ -1414,164 +1427,166 @@ yyreduce:
   switch (yyn)
     {
   case 6: /* declaration: TYPE ID  */
-#line 114 "parseur.y"
-            { 
-
-        insert_symbol((yyvsp[0].ch), (yyvsp[-1].ival), NULL); 
-        int typee = (yyvsp[-1].ival);
-        char* namee = malloc(strlen((yyvsp[0].ch)) + 1);
-        strcpy(namee, (yyvsp[0].ch));       
-         printf("hi\n");
-        printf("Type: %d\n", typee);
-        printf("Name: %s\n", namee);
-        }
-#line 1429 "parseur.tab.c"
-    break;
-
-  case 7: /* TYPE: INT  */
 #line 127 "parseur.y"
-        { (yyval.ival) = 0; }
+            { 
+        insert_symbol((yyvsp[0].ch), (yyvsp[-1].ival), NULL); 
+        }
 #line 1435 "parseur.tab.c"
     break;
 
-  case 8: /* TYPE: FLOAT  */
-#line 128 "parseur.y"
-            { (yyval.ival) = 1; }
+  case 7: /* TYPE: INT  */
+#line 133 "parseur.y"
+        { (yyval.ival) = 0; }
 #line 1441 "parseur.tab.c"
     break;
 
+  case 8: /* TYPE: FLOAT  */
+#line 134 "parseur.y"
+            { (yyval.ival) = 1; }
+#line 1447 "parseur.tab.c"
+    break;
+
   case 14: /* instruction: ID AFFECT expression PT_VIRG  */
-#line 139 "parseur.y"
+#line 145 "parseur.y"
                                  {
-        if (lookup_symbol((yyvsp[-3].ch)) == NULL) {
-            printf("Error: variable '%s' has not been declaredddddd\n", (yyvsp[-3].ch));
+        update_symbol((yyvsp[-3].ch), (yyvsp[-1].dval));
+        
+        symbol* sym = lookup_symbol((yyvsp[-3].ch));
+        if (sym == NULL) {
+        }else{
+            if (sym->type == INT_TYPE) {
+            printf("---------%s = %f\n", sym->name, sym->value);
+        } else if (sym->type == FLOAT_TYPE) {
+            printf("---------%s = %f\n", sym->name, sym->value);
         }
+        }
+      
     }
-#line 1451 "parseur.tab.c"
+#line 1466 "parseur.tab.c"
     break;
 
   case 24: /* expression: expression PLUS expression  */
-#line 162 "parseur.y"
+#line 177 "parseur.y"
                            { (yyval.dval) = (yyvsp[-2].dval)+(yyvsp[0].dval); }
-#line 1457 "parseur.tab.c"
+#line 1472 "parseur.tab.c"
     break;
 
   case 25: /* expression: expression MOINS expression  */
-#line 163 "parseur.y"
+#line 178 "parseur.y"
                               { (yyval.dval) = (yyvsp[-2].dval)-(yyvsp[0].dval); }
-#line 1463 "parseur.tab.c"
+#line 1478 "parseur.tab.c"
     break;
 
   case 26: /* expression: expression MUL expression  */
-#line 164 "parseur.y"
+#line 179 "parseur.y"
                             { (yyval.dval) = (yyvsp[-2].dval)*(yyvsp[0].dval); }
-#line 1469 "parseur.tab.c"
+#line 1484 "parseur.tab.c"
     break;
 
   case 27: /* expression: expression DIVISION expression  */
-#line 165 "parseur.y"
+#line 180 "parseur.y"
                                  { (yyval.dval) = (yyvsp[-2].dval)/(yyvsp[0].dval); }
-#line 1475 "parseur.tab.c"
+#line 1490 "parseur.tab.c"
     break;
 
   case 28: /* expression: PO expression PF  */
-#line 166 "parseur.y"
+#line 181 "parseur.y"
                    { (yyval.dval) = (yyvsp[-1].dval); }
-#line 1481 "parseur.tab.c"
+#line 1496 "parseur.tab.c"
     break;
 
   case 29: /* expression: MOINS expression  */
-#line 167 "parseur.y"
+#line 182 "parseur.y"
                                  { (yyval.dval) = -(yyvsp[0].dval); }
-#line 1487 "parseur.tab.c"
+#line 1502 "parseur.tab.c"
     break;
 
   case 30: /* expression: ENTIER  */
-#line 168 "parseur.y"
+#line 183 "parseur.y"
          { (yyval.dval) = (yyvsp[0].ival); }
-#line 1493 "parseur.tab.c"
+#line 1508 "parseur.tab.c"
     break;
 
   case 31: /* expression: REEL  */
-#line 169 "parseur.y"
+#line 184 "parseur.y"
        { (yyval.dval) = (float)(yyvsp[0].dval); }
-#line 1499 "parseur.tab.c"
+#line 1514 "parseur.tab.c"
     break;
 
   case 32: /* expression: COSINUS expression  */
-#line 170 "parseur.y"
+#line 185 "parseur.y"
                      { (yyval.dval)=cos((yyvsp[0].dval)); }
-#line 1505 "parseur.tab.c"
+#line 1520 "parseur.tab.c"
     break;
 
   case 33: /* expression: SINUS expression  */
-#line 171 "parseur.y"
+#line 186 "parseur.y"
                    { (yyval.dval)=sin((yyvsp[0].dval)); }
-#line 1511 "parseur.tab.c"
+#line 1526 "parseur.tab.c"
     break;
 
   case 34: /* expression: TANGENTE expression  */
-#line 172 "parseur.y"
+#line 187 "parseur.y"
                       { (yyval.dval)=tan((yyvsp[0].dval)); }
-#line 1517 "parseur.tab.c"
+#line 1532 "parseur.tab.c"
     break;
 
   case 35: /* expression: LOGARITHME expression  */
-#line 173 "parseur.y"
+#line 188 "parseur.y"
                         { (yyval.dval)=log10((yyvsp[0].dval)); }
-#line 1523 "parseur.tab.c"
+#line 1538 "parseur.tab.c"
     break;
 
   case 36: /* expression: ID  */
-#line 174 "parseur.y"
+#line 189 "parseur.y"
      {      
     symbol* s = lookup_symbol((yyvsp[0].ch));
     if (s->type == INT_TYPE) {
-        (yyval.dval) = *(int*)s->value;
+        (yyval.dval) = s->value;
     } else if (s->type == FLOAT_TYPE) {
-        (yyval.dval) = *(double*)s->value;
+        (yyval.dval) = s->value;
     }}
-#line 1535 "parseur.tab.c"
+#line 1550 "parseur.tab.c"
     break;
 
   case 37: /* CONDITION: expression INF expression  */
-#line 185 "parseur.y"
+#line 200 "parseur.y"
                           {(yyval.ival)=0; if((yyvsp[-2].dval)<(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1541 "parseur.tab.c"
+#line 1556 "parseur.tab.c"
     break;
 
   case 38: /* CONDITION: expression INFEGAL expression  */
-#line 186 "parseur.y"
+#line 201 "parseur.y"
                                {(yyval.ival)=0; if((yyvsp[-2].dval)<=(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1547 "parseur.tab.c"
+#line 1562 "parseur.tab.c"
     break;
 
   case 39: /* CONDITION: expression SUP expression  */
-#line 187 "parseur.y"
+#line 202 "parseur.y"
                            {(yyval.ival)=0; if((yyvsp[-2].dval)>(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1553 "parseur.tab.c"
+#line 1568 "parseur.tab.c"
     break;
 
   case 40: /* CONDITION: expression SUPEGAL expression  */
-#line 188 "parseur.y"
+#line 203 "parseur.y"
                                {(yyval.ival)=0; if((yyvsp[-2].dval)>=(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1559 "parseur.tab.c"
+#line 1574 "parseur.tab.c"
     break;
 
   case 41: /* CONDITION: expression DEGAL expression  */
-#line 189 "parseur.y"
+#line 204 "parseur.y"
                              {(yyval.ival)=0; if((yyvsp[-2].dval)==(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1565 "parseur.tab.c"
+#line 1580 "parseur.tab.c"
     break;
 
   case 42: /* CONDITION: expression DIFF expression  */
-#line 190 "parseur.y"
+#line 205 "parseur.y"
                             {(yyval.ival)=0; if((yyvsp[-2].dval)!=(yyvsp[0].dval)) (yyval.ival)=1;}
-#line 1571 "parseur.tab.c"
+#line 1586 "parseur.tab.c"
     break;
 
 
-#line 1575 "parseur.tab.c"
+#line 1590 "parseur.tab.c"
 
       default: break;
     }
@@ -1774,7 +1789,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 193 "parseur.y"
+#line 208 "parseur.y"
 
 #include <stdio.h> /* printf */
 int yyerror(const char *msg){

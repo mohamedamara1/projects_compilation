@@ -510,7 +510,7 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "lexeur.l"
-#line 2 "lexeur.l"
+#line 4 "lexeur.l"
 #include <stdio.h> /* printf */
 #include "parseur.tab.h" /* token constants def. in parseur.y via #define */
 #include <stdlib.h>
@@ -732,7 +732,7 @@ YY_DECL
 		}
 
 	{
-#line 15 "lexeur.l"
+#line 17 "lexeur.l"
 
 #line 738 "lex.yy.c"
 
@@ -803,180 +803,180 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "lexeur.l"
-{printf("lex::ENTIER %s\n",yytext); yylval.ival=atoi(yytext); return ENTIER; }
+#line 18 "lexeur.l"
+{yylval.ival=atoi(yytext); return ENTIER; }
 	YY_BREAK
 case 2:
-#line 18 "lexeur.l"
+#line 20 "lexeur.l"
 case 3:
 YY_RULE_SETUP
-#line 18 "lexeur.l"
-{printf("lex::REEL %s\n",yytext); yylval.dval=atof(yytext); return REEL; }
+#line 20 "lexeur.l"
+{yylval.dval=atof(yytext); return REEL; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "lexeur.l"
-{printf("lex::PT_VIRG %s\n",yytext); return PT_VIRG;  }
+#line 21 "lexeur.l"
+{return PT_VIRG;  }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "lexeur.l"
-{printf("lex::PLUS %s\n",yytext); return PLUS;  }
+#line 22 "lexeur.l"
+{return PLUS;  }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "lexeur.l"
-{printf("lex::MOINS %s\n",yytext); return MOINS;  }
+#line 23 "lexeur.l"
+{return MOINS;  }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "lexeur.l"
-{printf("lex::MUL %s\n",yytext); return MUL;  }
+#line 24 "lexeur.l"
+{return MUL;  }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "lexeur.l"
-{printf("lex::DIVISION %s\n",yytext); return DIVISION;  }
+#line 25 "lexeur.l"
+{return DIVISION;  }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "lexeur.l"
-{printf("lex::PO %s\n",yytext); return PO;  }
+#line 26 "lexeur.l"
+{return PO;  }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "lexeur.l"
-{printf("lex::PF %s\n",yytext); return PF;  }
+#line 27 "lexeur.l"
+{return PF;  }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "lexeur.l"
-{printf("lex::AO %s\n",yytext); return AO;  }
+#line 28 "lexeur.l"
+{return AO;  }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "lexeur.l"
-{printf("lex::Af %s\n",yytext); return AF;  }
+#line 29 "lexeur.l"
+{return AF;  }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 28 "lexeur.l"
+#line 30 "lexeur.l"
 { ; } /* ignore space, tab, and line return */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "lexeur.l"
-{printf("lex::IF %s\n",yytext);return IF; }
+#line 31 "lexeur.l"
+{return IF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "lexeur.l"
-{printf("lex::THEN %s\n",yytext);return THEN; }
+#line 32 "lexeur.l"
+{return THEN; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "lexeur.l"
-{printf("lex::ENDIF %s\n",yytext);return ENDIF; }
+#line 33 "lexeur.l"
+{return ENDIF; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 32 "lexeur.l"
-{printf("lex::ELSE) %s\n",yytext);return ELSE; }
+#line 34 "lexeur.l"
+{return ELSE; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 33 "lexeur.l"
-{printf("lex::ELSEIF %s\n",yytext);return ELSEIF; }
+#line 35 "lexeur.l"
+{return ELSEIF; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 34 "lexeur.l"
-{printf("lex::FOR) %s\n",yytext);return FOR; }
+#line 36 "lexeur.l"
+{return FOR; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 35 "lexeur.l"
-{printf("lex::WHILE %s\n",yytext);return WHILE; }
+#line 37 "lexeur.l"
+{return WHILE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 36 "lexeur.l"
-{printf("lex::cosinus %s\n",yytext); return COSINUS; }
+#line 38 "lexeur.l"
+{return COSINUS; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 37 "lexeur.l"
-{printf("lex::sinus %s\n",yytext); return SINUS; }
+#line 39 "lexeur.l"
+{return SINUS; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 38 "lexeur.l"
-{printf("lex::tangente %s\n",yytext); return TANGANTE; }
+#line 40 "lexeur.l"
+{return TANGANTE; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 39 "lexeur.l"
-{printf("lex::logarithme %s\n",yytext); return LOGARITHME; }
+#line 41 "lexeur.l"
+{return LOGARITHME; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 40 "lexeur.l"
-{printf("lex::INT %s\n",yytext);return INT; }
+#line 42 "lexeur.l"
+{return INT; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 41 "lexeur.l"
-{printf("lex::FLOAT %s\n",yytext);return FLOAT; }
+#line 43 "lexeur.l"
+{return FLOAT; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 43 "lexeur.l"
-{printf("lex::ID %s\n" ,yytext); yylval.ch=yytext; return ID;}
+#line 45 "lexeur.l"
+{yylval.ch=strdup(yytext); return ID;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 44 "lexeur.l"
-{printf("lex::INF %s\n",yytext);return INF; }
+#line 46 "lexeur.l"
+{return INF; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 45 "lexeur.l"
-{printf("lex::SUP %s\n",yytext);return SUP; }
+#line 47 "lexeur.l"
+{return SUP; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 46 "lexeur.l"
-{printf("lex::INFEGAL %s\n",yytext);return INFEGAL; }
+#line 48 "lexeur.l"
+{return INFEGAL; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 47 "lexeur.l"
-{printf("lex::SUPEGAL %s\n",yytext);return SUPEGAL; }
+#line 49 "lexeur.l"
+{return SUPEGAL; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 48 "lexeur.l"
-{printf("lex::DIFF %s\n",yytext);return DIFF; }
+#line 50 "lexeur.l"
+{return DIFF; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 49 "lexeur.l"
-{printf("lex::AFFECT %s\n",yytext);return AFFECT; }
+#line 51 "lexeur.l"
+{return AFFECT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 50 "lexeur.l"
-{printf("lex::DEGAL %s\n",yytext);return DEGAL; }
+#line 52 "lexeur.l"
+{return DEGAL; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 51 "lexeur.l"
-{ printf("lex::char %s\n",yytext); return yytext[0]; }
+#line 53 "lexeur.l"
+{ return yytext[0]; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 53 "lexeur.l"
+#line 55 "lexeur.l"
 ECHO;
 	YY_BREAK
 #line 983 "lex.yy.c"
@@ -1996,6 +1996,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 53 "lexeur.l"
-
+#line 55 "lexeur.l"
 

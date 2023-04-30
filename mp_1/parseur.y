@@ -12,7 +12,7 @@
 typedef struct {
     char* name;
     int type;  // 0 for int, 1 for float
-    void* value;
+    double value;
 } symbol;
 
 // Define a hash table to store symbol table entries
@@ -44,7 +44,7 @@ void insert_symbol(char* name, int type, void* value) {
     symbol* s = malloc(sizeof(symbol));
     s->name = strdup(name); // allocate memory for name
     s->type = type;
-    s->value = value;
+    s->value = 0;
     symbol_table[h] = s;
   //  free(name); // free name after it's copied to s->name
 }
@@ -59,7 +59,20 @@ symbol* lookup_symbol(char* name) {
         return NULL;  // Not found
     }
 }
-
+void update_symbol(char* name, double value) {
+    symbol* sym = lookup_symbol(name);
+    if (sym == NULL) {
+        printf("Error: variable '%s' has not been declared\n", name);
+    } else {
+        if (sym->type == INT_TYPE) {
+            int int_value = (int) value;
+            sym->value = (double)int_value;
+        } else if (sym->type == FLOAT_TYPE) {
+            float float_value = (float) value;
+            sym->value = (double)float_value;
+        }
+    }
+}
 int yylex(void); /* -Wall : avoid implicit call */
 int yyerror(const char*); /* same for bison */
 
@@ -112,14 +125,7 @@ declaration_list:
 
 declaration:
     TYPE ID { 
-
         insert_symbol($2, $1, NULL); 
-        int typee = $1;
-        char* namee = malloc(strlen($2) + 1);
-        strcpy(namee, $2);       
-         printf("hi\n");
-        printf("Type: %d\n", typee);
-        printf("Name: %s\n", namee);
         }
 ;
 
@@ -137,9 +143,18 @@ instructions:
 
 instruction:
     ID AFFECT expression PT_VIRG {
-        if (lookup_symbol($1) == NULL) {
-            printf("Error: variable '%s' has not been declaredddddd\n", $1);
+        update_symbol($1, $3);
+        
+        symbol* sym = lookup_symbol($1);
+        if (sym == NULL) {
+        }else{
+            if (sym->type == INT_TYPE) {
+            printf("---------%s = %f\n", sym->name, sym->value);
+        } else if (sym->type == FLOAT_TYPE) {
+            printf("---------%s = %f\n", sym->name, sym->value);
         }
+        }
+      
     }
     | IF PO CONDITION PF THEN instruction ENDIF                   
     | IF PO CONDITION PF THEN instruction ELSE instruction ENDIF
@@ -174,9 +189,9 @@ expression PLUS expression { $$ = $1+$3; }
 | ID {      
     symbol* s = lookup_symbol($1);
     if (s->type == INT_TYPE) {
-        $$ = *(int*)s->value;
+        $$ = s->value;
     } else if (s->type == FLOAT_TYPE) {
-        $$ = *(double*)s->value;
+        $$ = s->value;
     }}
 ;
 
