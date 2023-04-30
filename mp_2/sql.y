@@ -1,4 +1,3 @@
-
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +37,12 @@ select_statement: SELECT select_expr_list FROM table_references optional_join_cl
                  ;
 
 update_statement: UPDATE table_name SET column_name EQUAL VALUE optional_where_clause
+                 {
+                   /* Semantic error: a WHERE clause is required when using the "UPDATE" statement */
+                   if (!yypcontext_find_symbol("WHERE")) {
+                       printf("Parsing:: semantic error: a WHERE clause is required when using the \"UPDATE\" statement\n");
+                   }
+                 }
                  ;
 
 delete_statement: DELETE FROM table_name optional_where_clause
@@ -99,6 +104,11 @@ optional_where_clause: WHERE expression
 
 expression: NAME EQUAL VALUE
            {
+               /* Semantic error: a WHERE clause is required when using the "UPDATE" statement */
+               if (strcmp($1, "UPDATE") == 0 && !yypcontext_find_symbol("WHERE")) {
+                   printf("Parsing:: semantic error: a WHERE clause is required when using the \"UPDATE\" statement\n");
+               }
+
                /* Semantic error: values for NAME and VALUE should not be the same */
                if (strcmp($1, $3) == 0) {
                    printf("Parsing:: semantic error: NAME and VALUE cannot be the same\n");
