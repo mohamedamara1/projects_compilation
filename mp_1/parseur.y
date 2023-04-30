@@ -1,17 +1,31 @@
 %{
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include "parseur.h"
+
+#define INT_TYPE 0
+#define FLOAT_TYPE 1
 
 // Define a struct for storing symbol table entries
 typedef struct {
     char* name;
     int type;  // 0 for int, 1 for float
+    void* value;
 } symbol;
 
 // Define a hash table to store symbol table entries
 #define TABLE_SIZE 100
 symbol* symbol_table[TABLE_SIZE];
+
+void init_symbol_table() {
+    int i;
+
+    for (i = 0; i < TABLE_SIZE; i++) {
+        symbol_table[i] = NULL;
+    }
+}
 
 // Function to hash a string
 unsigned long hash(char* str) {
@@ -25,22 +39,24 @@ unsigned long hash(char* str) {
 }
 
 // Function to insert a symbol into the symbol table
-void insert_symbol(char* name, int type) {
-    unsigned long h = hash(name);
+void insert_symbol(char* name, int type, void* value) {
+   unsigned long h = hash(name) % 100;
     symbol* s = malloc(sizeof(symbol));
-    s->name = strdup(name);
+    s->name = strdup(name); // allocate memory for name
     s->type = type;
+    s->value = value;
     symbol_table[h] = s;
+  //  free(name); // free name after it's copied to s->name
 }
 
 // Function to lookup a symbol in the symbol table
-int lookup_symbol(char* name) {
+symbol* lookup_symbol(char* name) {
     unsigned long h = hash(name);
     symbol* s = symbol_table[h];
     if (s != NULL && strcmp(s->name, name) == 0) {
-        return s->type;
+        return s;
     } else {
-        return -1;  // Not found
+        return NULL;  // Not found
     }
 }
 
@@ -55,14 +71,18 @@ int yyerror(const char*); /* same for bison */
 %start program
 
 /* Typage des valeurs de symboles term. ou non-term */
-%union {double dval;  int ival; char ch;}
+%union {
+    double dval;
+    int ival;
+    char* ch;
+    }
 %token <ch>ID
+
 %token IF THEN ELSE ELSEIF ENDIF AO AF
 %token FOR WHILE
 %token <ival> ENTIER 
 %token <dval> REEL
 %token COSINUS SINUS TANGANTE LOGARITHME
-%token INT FLOAT
 %type <dval> expression 
 %type <void> instruction
 %type <ival>CONDITION
@@ -73,8 +93,12 @@ int yyerror(const char*); /* same for bison */
 %token PO PF PT_VIRG
 %left COSINUS SINUS TANGENTE
 %left LOGARITHME
- 
 %nonassoc MOINSU
+
+%token INT
+%token FLOAT
+
+%type <ival> TYPE
 %%
 
 program:
@@ -87,7 +111,16 @@ declaration_list:
 ;
 
 declaration:
-    TYPE ID { insert_symbol($2, $1); }
+    TYPE ID { 
+
+        insert_symbol($2, $1, NULL); 
+        int typee = $1;
+        char* namee = malloc(strlen($2) + 1);
+        strcpy(namee, $2);       
+         printf("hi\n");
+        printf("Type: %d\n", typee);
+        printf("Name: %s\n", namee);
+        }
 ;
 
 TYPE:
@@ -104,20 +137,8 @@ instructions:
 
 instruction:
     ID AFFECT expression PT_VIRG {
-        if (lookup_symbol($1) == -1) {
-            fprintf(stderr, "Error: variable 'my_variable' has not been declared\n");
-    exit(1);
-
-            printf("Error: Undeclared variable '%s'\n", $1);
-            YYERROR;
-        }
-        else if (lookup_symbol($1) == 0 && $3 != (int)$3) {
-            printf("Error: Type mismatch on variable '%s'\n", $1);
-            YYERROR;
-        }
-        else if (lookup_symbol($1) == 1 && $3 == (int)$3) {
-            printf("Error: Type mismatch on variable '%s'\n", $1);
-            YYERROR;
+        if (lookup_symbol($1) == NULL) {
+            printf("Error: variable '%s' has not been declaredddddd\n", $1);
         }
     }
     | IF PO CONDITION PF THEN instruction ENDIF                   
@@ -150,7 +171,13 @@ expression PLUS expression { $$ = $1+$3; }
 | SINUS expression { $$=sin($2); }
 | TANGENTE expression { $$=tan($2); }
 | LOGARITHME expression { $$=log10($2); }
-| ID { $$ = $1;}
+| ID {      
+    symbol* s = lookup_symbol($1);
+    if (s->type == INT_TYPE) {
+        $$ = *(int*)s->value;
+    } else if (s->type == FLOAT_TYPE) {
+        $$ = *(double*)s->value;
+    }}
 ;
 
 

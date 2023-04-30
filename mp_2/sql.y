@@ -62,9 +62,6 @@ table_references: table_reference
     | table_references ',' table_reference 
     ;   
 
-table_list: table_name
-            | table_list COMMA table_name
-            ;
 table_reference:  table_factor
   | join_table
 ;

@@ -40,7 +40,7 @@ LOGARITHME  "log"{reel}
 "int"     {printf("lex::INT %s\n",yytext);return INT; }
 "float"     {printf("lex::FLOAT %s\n",yytext);return FLOAT; }
 
-{lettre}({lettre}|{chiffre})* {printf("lex::ID= %s\n" ,yytext); yylval.ch=yytext; return ID;}
+{lettre}({lettre}|{chiffre})* {printf("lex::ID %s\n" ,yytext); yylval.ch=yytext; return ID;}
 "<"          {printf("lex::INF %s\n",yytext);return INF; }
 ">"          {printf("lex::SUP %s\n",yytext);return SUP; }
 "<="       {printf("lex::INFEGAL %s\n",yytext);return INFEGAL; }

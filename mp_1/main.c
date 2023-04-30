@@ -4,11 +4,12 @@
 /* usage: ./main < input.txt */
 #include <stdio.h> /* printf */
 #include <stdlib.h> /* exit */
+#include "parseur.h"
 int main(void)
 {
-if (yyparse()==0) { /* yyparse calls yylex */
-       printf("\nParsing:: syntax OK\n"); /* reached if parsing folllows the grammar*/ 
-}
-
+       init_symbol_table();
+       if (yyparse()==0) { /* yyparse calls yylex */
+              printf("\nParsing:: syntax OK\n"); /* reached if parsing folllows the grammar*/ 
+       }
 exit(EXIT_SUCCESS);
 }

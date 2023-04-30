@@ -70,24 +70,24 @@ extern int yydebug;
     SINUS = 271,                   /* SINUS  */
     TANGANTE = 272,                /* TANGANTE  */
     LOGARITHME = 273,              /* LOGARITHME  */
-    INT = 274,                     /* INT  */
-    FLOAT = 275,                   /* FLOAT  */
-    INF = 276,                     /* INF  */
-    SUP = 277,                     /* SUP  */
-    INFEGAL = 278,                 /* INFEGAL  */
-    SUPEGAL = 279,                 /* SUPEGAL  */
-    DIFF = 280,                    /* DIFF  */
-    AFFECT = 281,                  /* AFFECT  */
-    DEGAL = 282,                   /* DEGAL  */
-    PLUS = 283,                    /* PLUS  */
-    MOINS = 284,                   /* MOINS  */
-    MUL = 285,                     /* MUL  */
-    DIVISION = 286,                /* DIVISION  */
-    PO = 287,                      /* PO  */
-    PF = 288,                      /* PF  */
-    PT_VIRG = 289,                 /* PT_VIRG  */
-    TANGENTE = 290,                /* TANGENTE  */
-    MOINSU = 291                   /* MOINSU  */
+    INF = 274,                     /* INF  */
+    SUP = 275,                     /* SUP  */
+    INFEGAL = 276,                 /* INFEGAL  */
+    SUPEGAL = 277,                 /* SUPEGAL  */
+    DIFF = 278,                    /* DIFF  */
+    AFFECT = 279,                  /* AFFECT  */
+    DEGAL = 280,                   /* DEGAL  */
+    PLUS = 281,                    /* PLUS  */
+    MOINS = 282,                   /* MOINS  */
+    MUL = 283,                     /* MUL  */
+    DIVISION = 284,                /* DIVISION  */
+    PO = 285,                      /* PO  */
+    PF = 286,                      /* PF  */
+    PT_VIRG = 287,                 /* PT_VIRG  */
+    TANGENTE = 288,                /* TANGENTE  */
+    MOINSU = 289,                  /* MOINSU  */
+    INT = 290,                     /* INT  */
+    FLOAT = 291                    /* FLOAT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,10 +96,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "parseur.y"
-double dval;  int ival; char ch;
+#line 74 "parseur.y"
 
-#line 103 "parseur.tab.h"
+    double dval;
+    int ival;
+    char* ch;
+    
+
+#line 107 "parseur.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

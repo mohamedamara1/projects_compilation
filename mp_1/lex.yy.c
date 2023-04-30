@@ -932,7 +932,7 @@ YY_RULE_SETUP
 case 27:
 YY_RULE_SETUP
 #line 43 "lexeur.l"
-{printf("lex::ID= %s\n" ,yytext); yylval.ch=yytext; return ID;}
+{printf("lex::ID %s\n" ,yytext); yylval.ch=yytext; return ID;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
