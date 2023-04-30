@@ -23,7 +23,7 @@ Voici la description de chaque ligne de code de Makefile :
 - `lex.yy.c: lexeur.l`: Définit une règle pour créer le fichier `lex.yy.c`. La règle spécifie que le fichier `lex.yy.c` dépend du fichier `lexeur.l`. Le programme Flex est utilisé pour compiler le fichier `lexeur.l` en `lex.yy.c`.
 - `$(LEX) -o $@ $<` : Compile le fichier `lexeur.l` en `lex.yy.c`. Cette commande utilise la variable `LEX` pour spécifier le programme Flex à utiliser. Le fichier `lexeur.l` est compilé en `lex.yy.c`, qui est créé à l'aide de l'option `-o`.
 - `parseur.tab.c parseur.tab.h: parseur.y`: Définit une règle pour créer les fichiers `parseur.tab.c` et `parseur.tab.h`. La règle spécifie que les fichiers `parseur.tab.c` et `parseur.tab.h` dépendent du fichier `parseur.y`. Le programme Bison est utilisé pour compiler le fichier `parseur.y` en `parseur.tab.c` et `parseur.tab.h`.
-- `$(YACC) -d -o parseur.tab.c $<` : Compile le fichier `parseur.y` en `parseur.tab.c` et `parseur.tab.h`. Cette commande utilise la variable `YACC` pour spécifier le programme Bison à utiliser. Le fichier `parseur.y` est compilé en `parseur.tab.c` et `parseur.tab.h`, qui sont créés à l'aide de l'option `-o`. L'option `-d` est utilisée pour générer le fichier `parseur.tab.
+- `$(YACC) -d -o parseur.tab.c $<` : Compile le fichier `parseur.y` en `parseur.tab.c` et `parseur.tab.h`. Cette commande utilise la variable `YACC` pour spécifier le programme Bison à utiliser. Le fichier `parseur.y` est compilé en `parseur.tab.c` et `parseur.tab.h`, qui sont créés à l'aide de l'option `-o`. L'option `-d` est utilisée pour générer le fichier `parseur.tab.c'
 
 
 Pour exécuter le programme, suivez ces étapes :
