@@ -867,17 +867,17 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 29 "lexeur.l"
-{printf("lex::IF) %s\n",yytext);return IF; }
+{printf("lex::IF %s\n",yytext);return IF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 30 "lexeur.l"
-{printf("lex::THEN) %s\n",yytext);return THEN; }
+{printf("lex::THEN %s\n",yytext);return THEN; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 31 "lexeur.l"
-{printf("lex::ENDIF) %s\n",yytext);return ENDIF; }
+{printf("lex::ENDIF %s\n",yytext);return ENDIF; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
@@ -887,7 +887,7 @@ YY_RULE_SETUP
 case 18:
 YY_RULE_SETUP
 #line 33 "lexeur.l"
-{printf("lex::ELSEIF) %s\n",yytext);return ELSEIF; }
+{printf("lex::ELSEIF %s\n",yytext);return ELSEIF; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
@@ -897,7 +897,7 @@ YY_RULE_SETUP
 case 20:
 YY_RULE_SETUP
 #line 35 "lexeur.l"
-{printf("lex::WHILE) %s\n",yytext);return WHILE; }
+{printf("lex::WHILE %s\n",yytext);return WHILE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
@@ -922,12 +922,12 @@ YY_RULE_SETUP
 case 25:
 YY_RULE_SETUP
 #line 40 "lexeur.l"
-{printf("lex::INT) %s\n",yytext);return INT; }
+{printf("lex::INT %s\n",yytext);return INT; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 41 "lexeur.l"
-{printf("lex::FLOAT) %s\n",yytext);return FLOAT; }
+{printf("lex::FLOAT %s\n",yytext);return FLOAT; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
@@ -957,17 +957,17 @@ YY_RULE_SETUP
 case 32:
 YY_RULE_SETUP
 #line 48 "lexeur.l"
-{printf("lex::DIFF) %s\n",yytext);return DIFF; }
+{printf("lex::DIFF %s\n",yytext);return DIFF; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 49 "lexeur.l"
-{printf("lex::AFFECT) %s\n",yytext);return AFFECT; }
+{printf("lex::AFFECT %s\n",yytext);return AFFECT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 50 "lexeur.l"
-{printf("lex::DEGAL) %s\n",yytext);return DEGAL; }
+{printf("lex::DEGAL %s\n",yytext);return DEGAL; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
