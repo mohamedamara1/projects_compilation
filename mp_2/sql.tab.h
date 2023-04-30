@@ -58,27 +58,54 @@ extern int yydebug;
     UPDATE = 259,                  /* UPDATE  */
     DELETE = 260,                  /* DELETE  */
     INSERT = 261,                  /* INSERT  */
-    JOIN = 262,                    /* JOIN  */
-    ON = 263,                      /* ON  */
-    TABLE = 264,                   /* TABLE  */
-    WHERE = 265,                   /* WHERE  */
-    SET = 266,                     /* SET  */
-    FROM = 267,                    /* FROM  */
-    INTO = 268,                    /* INTO  */
-    VALUES = 269,                  /* VALUES  */
-    NAME = 270,                    /* NAME  */
-    EQUAL = 271,                   /* EQUAL  */
-    COMMA = 272,                   /* COMMA  */
-    PV = 273,                      /* PV  */
-    OP = 274,                      /* OP  */
-    CP = 275,                      /* CP  */
-    LT = 276,                      /* LT  */
-    GT = 277,                      /* GT  */
-    PLUS = 278,                    /* PLUS  */
-    MINUS = 279,                   /* MINUS  */
-    MULTIPLY = 280,                /* MULTIPLY  */
-    DIVISION = 281,                /* DIVISION  */
-    VALUE = 282                    /* VALUE  */
+    TABLE = 262,                   /* TABLE  */
+    WHERE = 263,                   /* WHERE  */
+    SET = 264,                     /* SET  */
+    FROM = 265,                    /* FROM  */
+    INTO = 266,                    /* INTO  */
+    VALUES = 267,                  /* VALUES  */
+    NAME = 268,                    /* NAME  */
+    EQUAL = 269,                   /* EQUAL  */
+    COMMA = 270,                   /* COMMA  */
+    PV = 271,                      /* PV  */
+    OP = 272,                      /* OP  */
+    CP = 273,                      /* CP  */
+    LT = 274,                      /* LT  */
+    GT = 275,                      /* GT  */
+    PLUS = 276,                    /* PLUS  */
+    MINUS = 277,                   /* MINUS  */
+    MULTIPLY = 278,                /* MULTIPLY  */
+    DIVISION = 279,                /* DIVISION  */
+    ON = 280,                      /* ON  */
+    USING = 281,                   /* USING  */
+    INNER = 282,                   /* INNER  */
+    CROSS = 283,                   /* CROSS  */
+    NATURAL = 284,                 /* NATURAL  */
+    JOIN = 285,                    /* JOIN  */
+    VALUE = 286,                   /* VALUE  */
+    AS = 287,                      /* AS  */
+    ANY = 288,                     /* ANY  */
+    SOME = 289,                    /* SOME  */
+    ALL = 290,                     /* ALL  */
+    GROUP = 291,                   /* GROUP  */
+    BY = 292,                      /* BY  */
+    ORDER = 293,                   /* ORDER  */
+    ASC = 294,                     /* ASC  */
+    DESC = 295,                    /* DESC  */
+    ASSIGN = 296,                  /* ASSIGN  */
+    OR = 297,                      /* OR  */
+    XOR = 298,                     /* XOR  */
+    ANDOP = 299,                   /* ANDOP  */
+    IN = 300,                      /* IN  */
+    IS = 301,                      /* IS  */
+    LIKE = 302,                    /* LIKE  */
+    REGEXP = 303,                  /* REGEXP  */
+    NOT = 304,                     /* NOT  */
+    BETWEEN = 305,                 /* BETWEEN  */
+    COMPARISON = 306,              /* COMPARISON  */
+    SHIFT = 307,                   /* SHIFT  */
+    MOD = 308,                     /* MOD  */
+    UMINUS = 309                   /* UMINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -87,12 +114,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "sql.y"
+#line 40 "sql.y"
 
     char *string_val;
     double num_val;
 
-#line 96 "sql.tab.h"
+#line 123 "sql.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

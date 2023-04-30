@@ -1,4 +1,6 @@
-select nom from client;
-insert into test values (123,456);
-update client set name = 45 where id=65
-delete from avion where test= 45
+SELECT test FROM client;
+insert into test values ( 123, 456);
+SELECT tous from avion;
+update test set rojla=2;
+SELECT rojla  FROM client where rojla=5;
+delete from test where id = 1

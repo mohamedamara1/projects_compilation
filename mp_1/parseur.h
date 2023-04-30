@@ -3,4 +3,4 @@
 
 void init_symbol_table();
 
-#endif /* PARSEUR_H */
+#endif

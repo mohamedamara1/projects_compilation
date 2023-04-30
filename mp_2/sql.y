@@ -7,9 +7,33 @@
 %define parse.error custom
 %locations
 
-%token SELECT UPDATE DELETE INSERT JOIN ON TABLE WHERE SET FROM INTO VALUES
+%token SELECT UPDATE DELETE INSERT   TABLE WHERE SET FROM INTO VALUES
 %token NAME EQUAL COMMA PV OP CP LT GT PLUS MINUS MULTIPLY DIVISION
+%token ON USING INNER CROSS NATURAL JOIN
 %token <string_val> VALUE
+%token AS
+%token ANY
+%token SOME
+%token ALL
+%token GROUP BY ORDER ASC DESC 
+%right ASSIGN
+%left OR
+%left XOR
+%left ANDOP
+%nonassoc IN IS LIKE REGEXP
+%left NOT '!'
+%left BETWEEN
+%left <subtok> COMPARISON /* = <> < > <= >= <=> */
+%left '|'
+%left '&'
+%left <subtok> SHIFT /* << >> */
+%left '+' '-'
+%left '*' '/' '%' MOD
+%left '^'
+%nonassoc UMINUS
+
+
+
 
 %start input  /* Add %start statement here */
 
@@ -33,27 +57,45 @@ statement: select_statement
           | insert_statement
           ;
 
-select_statement: SELECT select_expr_list FROM table_references optional_join_clause optional_where_clause
+select_statement: SELECT select_expr_list FROM table_references opt_where
                  ;
 
-update_statement: UPDATE table_name SET column_name EQUAL VALUE optional_where_clause
-                 {
-                   /* Semantic error: a WHERE clause is required when using the "UPDATE" statement */
-                   if (!yypcontext_find_symbol("WHERE")) {
-                       printf("Parsing:: semantic error: a WHERE clause is required when using the \"UPDATE\" statement\n");
-                   }
-                 }
+update_statement: UPDATE table_references
+                  SET update_asgn_list
+                  opt_where
+                  opt_orderby
+             
                  ;
 
-delete_statement: DELETE FROM table_name optional_where_clause
+update_asgn_list:
+     NAME EQUAL expr 
+   | NAME '.' NAME EQUAL expr 
+   ;
+
+   opt_where: /* nil */ 
+   | WHERE expr
+   ;
+
+opt_groupby: /* nil */ 
+   | GROUP BY groupby_list
+  ;
+opt_orderby: /* nil */ | ORDER BY groupby_list 
+   ;
+
+  groupby_list: expr opt_asc_desc              
+   | groupby_list ',' expr opt_asc_desc                  
+   ;
+
+opt_asc_desc: /* nil */
+   | ASC               
+   | DESC               
+    ;
+
+delete_statement: DELETE FROM table_name opt_where
                  ;
 
 insert_statement: INSERT INTO table_name  VALUES  OP value_list CP
                  ;
-
-column_list: column_name
-            | column_list COMMA column_name
-            ;
 
 select_expr_list:
             select_expr
@@ -67,9 +109,7 @@ table_references: table_reference
     | table_references ',' table_reference 
     ;   
 
-table_list: table_name
-            | table_list COMMA table_name
-            ;
+
 table_reference:  table_factor
   | join_table
 ;
@@ -81,40 +121,71 @@ table_factor:
         | '(' table_references ')'
         ;
 
-table_subquery: '(' select_stmt ')' 
+table_subquery: '(' select_statement ')' 
    ;
 
 table_name: NAME
             ;
 
-join_clause: JOIN table_name ON expression
-            ;
+opt_as_alias: AS NAME
+  | NAME              
+  | /* nil */
+  ;
 
-optional_join_clause: join_clause
-                     |
-                     ;
+opt_as: AS 
+  | /* nil */
+  ;
 
+join_table:
+    table_reference opt_inner_cross JOIN table_factor opt_join_condition
+  ;
+
+opt_inner_cross: /* nil */ 
+   | INNER 
+   | CROSS 
+;
+
+opt_join_condition: join_condition | /* nil */ ;
+
+join_condition:
+    ON expr 
+    | USING '(' column_list ')' 
+    ;
+
+column_list: NAME          
+  | column_list ',' NAME   
+  ;
 value_list: VALUE
             | value_list COMMA VALUE
             ;
 
-optional_where_clause: WHERE expression
-                      |
-                      ;
+   /**** expressions ****/
 
-expression: NAME EQUAL VALUE
-           {
-               /* Semantic error: a WHERE clause is required when using the "UPDATE" statement */
-               if (strcmp($1, "UPDATE") == 0 && !yypcontext_find_symbol("WHERE")) {
-                   printf("Parsing:: semantic error: a WHERE clause is required when using the \"UPDATE\" statement\n");
-               }
+expr: NAME         
+   | NAME '.' NAME 
+   ;
 
-               /* Semantic error: values for NAME and VALUE should not be the same */
-               if (strcmp($1, $3) == 0) {
-                   printf("Parsing:: semantic error: NAME and VALUE cannot be the same\n");
-               }
-           }
-           ;
+expr: expr '+' expr
+   | expr '-' expr
+   | expr '*' expr
+   | expr '/' expr
+   | expr '%' expr
+   | expr MOD expr
+   | '-' expr %prec UMINUS
+   | expr ANDOP expr
+   | expr OR expr
+   | expr COMPARISON expr
+   | expr COMPARISON '(' select_statement ')'
+   | expr COMPARISON ANY '(' select_statement ')'
+   | expr COMPARISON SOME '(' select_statement ')'
+   | expr COMPARISON ALL '(' select_statement ')'
+   | expr '|' expr
+   | expr '&' expr
+   | NOT expr
+   | '!' expr
+   | VALUE
+   | expr EQUAL expr
+
 
 %%
 

@@ -14,13 +14,26 @@ UPDATE       { return UPDATE; }
 DELETE       { return DELETE; }
 INSERT       { return INSERT; }
 JOIN         { return JOIN; }
-ON           { return ON; }
 TABLE        { return TABLE; }
 WHERE        { return WHERE; }
 SET          { return SET; }
 FROM         { return FROM; }
 INTO         { return INTO; }
 VALUES       { return VALUES; }
+ANY          { return ANY; }
+SOME         { return SOME; }
+ALL          { return ALL; }
+AS           { return AS;}
+ON          { return ON; }
+USING       { return USING; }
+INNER       { return INNER; }
+CROSS       { return CROSS; }
+NATURAL     { return NATURAL; }
+GROUP       { return GROUP; }
+BY          { return BY; }
+ASC         { return ASC; }
+DESC        { return DESC; }
+ORDER       { return ORDER; }
 \=          { return EQUAL; }
 \,          { return COMMA; }
 \;          { return PV; }
